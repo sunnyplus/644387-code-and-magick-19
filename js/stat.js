@@ -3,9 +3,8 @@
 var BAR_START_X = 120;
 var BAR_START_Y = 240;
 var CLOUD_WIDTH = 500;
-var numberOfPlayers = 4;
 var BAR_GAP = 50;
-var BAR_WIDTH = Math.floor(CLOUD_WIDTH / numberOfPlayers - BAR_GAP);
+
 var currentHeight = 150;
 var makeColor = function () {
   return Math.ceil(Math.random() * 100);
@@ -32,6 +31,7 @@ var renderCloud = function (ctx, fillColor) {
 
 window.renderStatistics = function (ctx, players, times) {
 
+  var BAR_WIDTH = Math.floor(CLOUD_WIDTH / players.length - BAR_GAP);
   renderCloud(ctx, 'rgba(0, 0, 0, 0.7)');
   ctx.font = '16 px PT Mono';
   ctx.translate(-10, -10);
@@ -47,11 +47,10 @@ window.renderStatistics = function (ctx, players, times) {
     }
   }
 
-  for (var x = 0, g = 0; x < numberOfPlayers; x++, g = g + BAR_GAP + BAR_WIDTH) {
+  for (var x = 0, g = 0; x < players.length; x++, g = g + BAR_GAP + BAR_WIDTH) {
     if (players[x] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      // ctx.fillStyle = 'rgb(' + makeColor() + ',' + makeColor() + ',' + makeColor() + ')';
       ctx.fillStyle = 'hsl(210,' + makeColor() + '%, 50%)';
     }
     currentHeight = 150 * times[x] / basicHeight;
