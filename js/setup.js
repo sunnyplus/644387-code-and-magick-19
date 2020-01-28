@@ -1,17 +1,19 @@
 'use strict';
 
-document.querySelector('.overlay.setup').classList.remove('hidden');
+var WIZARDS_NUMBER = 4;
 
+var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
+var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var WIZARD_COATCOLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var WIZARD_EYESCOLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+
+document.querySelector('.overlay.setup').classList.remove('hidden');
 
 var similarElementsList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
-var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var WIZARD_COATCOLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var WIZARD_EYESCOLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -27,7 +29,7 @@ var getRandomWizard = function (names, surnames, coatcolors, eyescolors) {
 
 var wizards = [];
 
-for (var i = 0; i < 4; i++) {
+for (var i = 0; i < WIZARDS_NUMBER; i++) {
   wizards.push(getRandomWizard(WIZARD_NAMES, WIZARD_SURNAMES, WIZARD_COATCOLORS, WIZARD_EYESCOLORS));
 }
 
