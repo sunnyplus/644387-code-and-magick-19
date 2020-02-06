@@ -17,14 +17,7 @@ var TITLE_Y_GAP = 35;
 var RESULTS_Y_GAP = 15;
 var MAX_HEIGHT = 150;
 
-var makeColor = function () {
-  return Math.ceil(Math.random() * 100);
-};
-var renderCurve = function (ctx, x1, y1, x2, y2) {
-  ctx.quadraticCurveTo(x2, y2, x1, y1);
-};
-
-var cloudArray = [
+var CLOUD_COORDINATES = [
   {
     curveToX: 200,
     curveToY: 30,
@@ -75,12 +68,19 @@ var cloudArray = [
   }
 ];
 
+var makeColor = function () {
+  return Math.ceil(Math.random() * 100);
+};
+var renderCurve = function (ctx, x1, y1, x2, y2) {
+  ctx.quadraticCurveTo(x2, y2, x1, y1);
+};
+
 var renderCloud = function (ctx, fillColor, shiftX, shiftY) {
   ctx.beginPath();
   ctx.fillStyle = fillColor;
   ctx.moveTo(CLOUD_START_X + shiftX, CLOUD_START_Y + shiftY);
 
-  cloudArray.forEach(function (elm) {
+  CLOUD_COORDINATES.forEach(function (elm) {
     renderCurve(ctx, elm.curveToX + shiftX, elm.curveToY + shiftY, elm.controlX + shiftX, elm.controlY + shiftY);
   });
 
