@@ -7,7 +7,28 @@ var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', '�
 var WIZARD_COATCOLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYESCOLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
-document.querySelector('.overlay.setup').classList.remove('hidden');
+var ESC_KEY = 'Escape';
+var ENTER_KEY = 'Enter';
+
+// var userNameInput = document.querySelector('input[name=username]');
+var setup = document.querySelector('.overlay.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = document.querySelector('.setup-close');
+var openPopup = function () { // функция открытия модального окна
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () { // функция закрытия модального окна
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === ESC_KEY && evt.target.tagName !== 'INPUT') {
+    closePopup();
+  }
+};
 
 var similarElementsList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -44,8 +65,25 @@ var renderWizars = function () {
   }
 
   similarElementsList.appendChild(fragment);
+  document.querySelector('.setup-similar').classList.remove('hidden'); // показ блока похожих магов
 };
 
 renderWizars();
 
-document.querySelector('.setup-similar').classList.remove('hidden');
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function () {
+  closePopup();
+});
